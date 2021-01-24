@@ -29,16 +29,21 @@
                                             <constraint firstAttribute="height" constant="30" id="iEZ-Do-RNm"/>
                                             <constraint firstAttribute="width" constant="30" id="xYj-qq-9jM"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <color key="tintColor" systemColor="labelColor"/>
                                         <state key="normal">
                                             <imageReference key="image" image="location.north" catalog="system" symbolScale="large"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="bold"/>
                                         </state>
+                                        <connections>
+                                            <action selector="locationButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ulI-xk-cSC"/>
+                                        </connections>
                                     </button>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="firenze" borderStyle="roundedRect" placeholder="Enter the City Name" textAlignment="right" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="20M-Tt-CMZ">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter the City" textAlignment="right" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="20M-Tt-CMZ">
                                         <rect key="frame" x="38" y="0.0" width="274" height="30"/>
-                                        <color key="backgroundColor" white="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.14999999999999999" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="go"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="go" textContentType="address-level2"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lbP-k7-bws" userLabel="Search Button">
                                         <rect key="frame" x="320" y="0.0" width="30" height="30"/>
@@ -49,7 +54,11 @@
                                         <color key="tintColor" systemColor="labelColor"/>
                                         <state key="normal">
                                             <imageReference key="image" image="magnifyingglass" catalog="system" symbolScale="large"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="bold"/>
                                         </state>
+                                        <connections>
+                                            <action selector="searchButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NAk-Wj-q0m"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -64,33 +73,33 @@
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="kcf-iX-VQF"/>
                                         </constraints>
                                     </imageView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="44" translatesAutoresizingMaskIntoConstraints="NO" id="lbB-P3-JG7" userLabel="Temp Stack View">
-                                        <rect key="frame" x="31" y="120" width="134" height="45"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="lbB-P3-JG7" userLabel="Temp Stack View">
+                                        <rect key="frame" x="85" y="120" width="90" height="45"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SuZ-iv-Aps" userLabel="Temperature Label">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="45" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SuZ-iv-Aps" userLabel="Temperature Label">
                                                 <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="45" id="4Vg-tD-gNn"/>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="lkF-WP-07S"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="omI-Qi-lFJ" userLabel="Degrees Label">
-                                                <rect key="frame" x="89" y="0.0" width="45" height="45"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="˚C" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="omI-Qi-lFJ" userLabel="Degrees Label">
+                                                <rect key="frame" x="45" y="0.0" width="45" height="45"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="45" id="KCV-6u-2Hb"/>
                                                     <constraint firstAttribute="height" constant="45" id="t97-lQ-MdK"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8z0-lS-dlK" userLabel="Location Label">
-                                        <rect key="frame" x="123.66666666666667" y="170" width="41.333333333333329" height="45"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stockholm" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8z0-lS-dlK" userLabel="Location Label">
+                                        <rect key="frame" x="77" y="170" width="81" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="LqP-iv-j7r"/>
                                         </constraints>
@@ -99,11 +108,11 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.14999999999999999" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="8z0-lS-dlK" secondAttribute="trailing" constant="15" id="6WY-MH-taB"/>
+                                    <constraint firstAttribute="trailing" secondItem="8z0-lS-dlK" secondAttribute="trailing" constant="22" id="6WY-MH-taB"/>
                                     <constraint firstItem="pQB-FX-eFU" firstAttribute="top" secondItem="FZe-Gd-o8Z" secondAttribute="top" constant="15" id="8Dl-hP-ADP"/>
-                                    <constraint firstAttribute="trailing" secondItem="lbB-P3-JG7" secondAttribute="trailing" constant="15" id="8uS-tn-3KL"/>
+                                    <constraint firstAttribute="trailing" secondItem="lbB-P3-JG7" secondAttribute="trailing" constant="5" id="8uS-tn-3KL"/>
                                     <constraint firstAttribute="trailing" secondItem="pQB-FX-eFU" secondAttribute="trailing" constant="15" id="HjW-ML-a4j"/>
                                     <constraint firstAttribute="bottom" secondItem="8z0-lS-dlK" secondAttribute="bottom" constant="15" id="NJX-8h-G54"/>
                                     <constraint firstItem="8z0-lS-dlK" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="FZe-Gd-o8Z" secondAttribute="leading" constant="15" id="Pti-hy-Ctf"/>
@@ -128,6 +137,14 @@
                             <constraint firstAttribute="bottom" secondItem="MdI-0Y-jSE" secondAttribute="bottom" id="uH2-ch-h6G"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="cityLabel" destination="8z0-lS-dlK" id="hm7-qd-pEL"/>
+                        <outlet property="conditionImageView" destination="pQB-FX-eFU" id="6uV-23-MpS"/>
+                        <outlet property="infoView" destination="FZe-Gd-o8Z" id="mHd-yC-Tlr"/>
+                        <outlet property="searchTextField" destination="20M-Tt-CMZ" id="Jcg-gI-eJo"/>
+                        <outlet property="tempTypeLabel" destination="omI-Qi-lFJ" id="iyY-Qd-YI1"/>
+                        <outlet property="temperatureLabel" destination="SuZ-iv-Aps" id="ZMn-Tk-VOa"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
