@@ -7,8 +7,8 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate {
-
+class WeatherViewController: UIViewController, UITextFieldDelegate, WeatherManagerDelegate {
+    
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var infoView: UIView!
     @IBOutlet weak var conditionImageView: UIImageView!
@@ -22,6 +22,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
 
         searchTextField.delegate = self
+        weatherManager.delegate = self
         
         infoView.layer.cornerRadius = 5
         infoView.clipsToBounds = true
@@ -58,6 +59,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
         
         searchTextField.text = ""
+    }
+    
+    func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel) {
+        print(weather.conditionName)
+        print(weather.temperatureString)
+        print(weather.cityName)
+    }
+    
+    func didFailWithError(error: Error) {
+        print(error)
     }
     
 }
