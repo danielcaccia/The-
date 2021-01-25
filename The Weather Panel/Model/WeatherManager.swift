@@ -14,14 +14,13 @@ protocol WeatherManagerDelegate {
 
 struct WeatherManager {
     
-    let baseURL = "https://api.openweathermap.org/data/2.5/weather?appid=\(K.apiKey)"
+    let baseURL = "https://api.openweathermap.org/data/2.5/weather?appid=\(K.weatherAPIKey)"
     
     var delegate: WeatherManagerDelegate?
     
     func fetchWeather(with units: String, for cityName: String) {
         let useUnits = (units != "˚C") ? K.fahrenheit : K.celsius
         let useCityName = cityName.replacingOccurrences(of: " ", with: "%20")
-        
         let urlString = "\(baseURL)&units=\(useUnits)&q=\(useCityName)"
         
         performRequest(using: urlString)
