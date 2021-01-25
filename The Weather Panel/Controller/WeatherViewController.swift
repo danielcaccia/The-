@@ -6,10 +6,9 @@
 //
 
 import UIKit
-import AVKit
 import AVFoundation
 
-class WeatherViewController: UIViewController, UITextFieldDelegate, WeatherManagerDelegate, BackgroundManagerDelegate {
+class WeatherViewController: UIViewController {
     
     @IBOutlet weak var videoLayer: UIView!
     @IBOutlet weak var searchTextField: UITextField!
@@ -39,6 +38,36 @@ class WeatherViewController: UIViewController, UITextFieldDelegate, WeatherManag
     
     }
     
+    func playVideo(with videoURL: URL) {
+        let player = AVPlayer(url: videoURL)
+        player.isMuted = true
+        player.actionAtItemEnd = .none
+        
+        playerLayer = AVPlayerLayer(player: player)
+        playerLayer.frame = self.view.bounds
+        playerLayer.videoGravity = .resizeAspectFill
+        
+        self.videoLayer.layer.addSublayer(playerLayer)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(playerItemDidReachEnd(notification:)),
+                                               name: .AVPlayerItemDidPlayToEndTime,
+                                               object: player.currentItem
+        )
+        
+        player.play()
+    }
+    
+    @objc func playerItemDidReachEnd(notification: Notification) {
+        playerLayer.player?.seek(to: CMTime.zero)
+    }
+    
+}
+
+//MARK: - UITextFieldDelegate
+
+extension WeatherViewController: UITextFieldDelegate {
+  
     @IBAction func searchButtonPressed(_ sender: UIButton) {
         searchTextField.endEditing(true)
     }
@@ -69,19 +98,11 @@ class WeatherViewController: UIViewController, UITextFieldDelegate, WeatherManag
         searchTextField.text = ""
     }
     
-    func didUpdateBackground(_ backgroundManager: BackgroundManager, videoId: Int) {
-        DispatchQueue.main.async {
-            backgroundManager.getVideoLink(for: videoId)
-        }
-    }
-    
-    func didUpdateVideo(_ backgroundManager: BackgroundManager, videoStringURL: String) {
-        DispatchQueue.main.async {
-            if let videoURL = URL(string: videoStringURL) {
-                self.playVideo(with: videoURL)
-            }
-        }
-    }
+}
+
+//MARK: - WeatherManagerDelegate
+
+extension WeatherViewController: WeatherManagerDelegate {
     
     func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel) {
         DispatchQueue.main.async {
@@ -95,28 +116,24 @@ class WeatherViewController: UIViewController, UITextFieldDelegate, WeatherManag
         print(error)
     }
     
-    func playVideo(with videoURL: URL) {
-        let player = AVPlayer(url: videoURL)
-        player.isMuted = true
-        player.actionAtItemEnd = .none
-        
-        playerLayer = AVPlayerLayer(player: player)
-        playerLayer.frame = self.view.bounds
-        playerLayer.videoGravity = .resizeAspectFill
-        
-        self.videoLayer.layer.addSublayer(playerLayer)
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(playerItemDidReachEnd(notification:)),
-                                               name: .AVPlayerItemDidPlayToEndTime,
-                                               object: player.currentItem
-        )
-        
-        player.play()
+}
+
+//MARK: - BackgroundManagerDelegate
+
+extension WeatherViewController: BackgroundManagerDelegate {
+    
+    func didUpdateBackground(_ backgroundManager: BackgroundManager, videoId: Int) {
+        DispatchQueue.main.async {
+            backgroundManager.getVideoLink(for: videoId)
+        }
     }
     
-    @objc func playerItemDidReachEnd(notification: Notification) {
-        playerLayer.player?.seek(to: CMTime.zero)
+    func didUpdateVideo(_ backgroundManager: BackgroundManager, videoStringURL: String) {
+        DispatchQueue.main.async {
+            if let videoURL = URL(string: videoStringURL) {
+                self.playVideo(with: videoURL)
+            }
+        }
     }
     
 }
