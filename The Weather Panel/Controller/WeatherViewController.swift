@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+import CoreLocation
 
 class WeatherViewController: UIViewController {
     
@@ -18,6 +19,8 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var tempTypeLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
     
+    let locationManager = CLLocationManager()
+    
     var weatherManager = WeatherManager()
     var backgroundManager = BackgroundManager()
     var playerLayer = AVPlayerLayer()
@@ -28,14 +31,24 @@ class WeatherViewController: UIViewController {
         searchTextField.delegate = self
         weatherManager.delegate = self
         backgroundManager.delegate = self
+        locationManager.delegate = self
         
-        infoView.layer.cornerRadius = 5
-        infoView.clipsToBounds = true
-
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestLocation()
+        
+        setLayout()
     }
 
-    @IBAction func locationButtonPressed(_ sender: UIButton) {
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        if let cityName = cityLabel.text {
+            backgroundManager.fetchBackground(for: cityName)
+        }
+    }
     
+    @IBAction func locationButtonPressed(_ sender: UIButton) {
+        locationManager.requestLocation()
     }
     
     func playVideo(with videoURL: URL) {
@@ -62,6 +75,16 @@ class WeatherViewController: UIViewController {
         playerLayer.player?.seek(to: CMTime.zero)
     }
     
+    func setLayout() {
+        infoView.layer.cornerRadius = 5
+        infoView.clipsToBounds = true
+        
+        searchTextField.attributedPlaceholder = NSAttributedString(
+            string: "Enter the City Name",
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
+        )
+    }
+    
 }
 
 //MARK: - UITextFieldDelegate
@@ -73,7 +96,6 @@ extension WeatherViewController: UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        //return button function
         searchTextField.endEditing(true)
         
         return true
@@ -81,6 +103,8 @@ extension WeatherViewController: UITextFieldDelegate {
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         if textField.text != "" {
+            textField.placeholder = "Enter the City Name"
+            
             return true
         } else {
             textField.placeholder = "Type some city..."
@@ -91,7 +115,6 @@ extension WeatherViewController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if let cityName = searchTextField.text, let units = tempTypeLabel.text {
-            backgroundManager.fetchBackground(for: cityName)
             weatherManager.fetchWeather(with: units, for: cityName)
         }
         
@@ -109,6 +132,8 @@ extension WeatherViewController: WeatherManagerDelegate {
             self.conditionImageView.image = UIImage(systemName: weather.conditionName)
             self.temperatureLabel.text = weather.temperatureString
             self.cityLabel.text = weather.cityName
+            
+            self.backgroundManager.fetchBackground(for: weather.cityName)
         }
     }
     
@@ -134,6 +159,27 @@ extension WeatherViewController: BackgroundManagerDelegate {
                 self.playVideo(with: videoURL)
             }
         }
+    }
+    
+}
+
+//MARK: - CLLocationManagerDelegate
+
+extension WeatherViewController: CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.last, let units = tempTypeLabel.text {
+            locationManager.stopUpdatingLocation()
+            
+            let lat = location.coordinate.latitude
+            let lon = location.coordinate.longitude
+
+            weatherManager.fetchWeather(with: units, latitude: lat, longitude: lon)
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
     }
     
 }

@@ -101,10 +101,10 @@
 			isa = PBXGroup;
 			children = (
 				879A44A025BE0EBC000EFEE0 /* BackgroundManager.swift */,
+				8754297625BEFFE300AB5F3F /* BackgroundData.swift */,
 				879EC43325BCE5EE004EB430 /* WeatherManager.swift */,
 				879A449925BDB243000EFEE0 /* WeatherData.swift */,
 				879A449C25BDD0D3000EFEE0 /* WeatherModel.swift */,
-				8754297625BEFFE300AB5F3F /* BackgroundData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
