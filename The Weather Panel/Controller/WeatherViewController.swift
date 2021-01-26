@@ -12,6 +12,7 @@ import CoreLocation
 class WeatherViewController: UIViewController {
     
     @IBOutlet weak var videoLayer: UIView!
+    @IBOutlet weak var searchStackView: UIStackView!
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var infoView: UIView!
     @IBOutlet weak var conditionImageView: UIImageView!
@@ -78,6 +79,8 @@ class WeatherViewController: UIViewController {
     func setLayout() {
         infoView.layer.cornerRadius = 5
         infoView.clipsToBounds = true
+        searchStackView.layer.cornerRadius = 5
+        searchStackView.clipsToBounds = true
         
         searchTextField.attributedPlaceholder = NSAttributedString(
             string: "Enter the City Name",
