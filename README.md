@@ -15,7 +15,7 @@ This App implemented:
 
 Below there are some video shots of the app in portrait and landscape orientation:
 
-![SC2 Video](https://github.com/danielcaccia/The-Weather-Panel/blob/master/video1-SF.gif?raw=true)
-![SC2 Video](https://github.com/danielcaccia/The-Weather-Panel/blob/master/video2-SY.gif?raw=true)<br/>
-![SC2 Video](https://github.com/danielcaccia/The-Weather-Panel/blob/master/video3-SY.gif?raw=true)<br/>
-![SC2 Video](https://github.com/danielcaccia/The-Weather-Panel/blob/master/video4-RM.gif?raw=true)
+![SC2 Video](https://github.com/danielcaccia/Commons/blob/master/The-Weather-Panel/video1-SF.gif?raw=true)
+![SC2 Video](https://github.com/danielcaccia/Commons/blob/master/The-Weather-Panel/video2-SY.gif?raw=true)<br/>
+![SC2 Video](https://github.com/danielcaccia/Commons/blob/master/The-Weather-Panel/video3-SY.gif?raw=true)<br/>
+![SC2 Video](https://github.com/danielcaccia/Commons/blob/master/The-Weather-Panel/video4-RM.gif?raw=true)
